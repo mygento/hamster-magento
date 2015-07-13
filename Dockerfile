@@ -9,17 +9,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN git clone --mirror https://github.com/bragento/magento-core.git /opt/magento
-
-ADD ./scripts/start.sh /start.sh
-
-RUN phpenv versions
-
-RUN phpenv global 5.5.26
-
-RUN php --version
-
-RUN php -i
+RUN git clone https://github.com/EcomDev/EcomDev_PHPUnit.git /opt/ecomdev-phpunit && cd /opt/ecomdev-phpunit && git submodule update --init
 
 RUN rm -rf /tmp/* /var/tmp/*
-
-CMD ["/bin/bash", "/start.sh"]
